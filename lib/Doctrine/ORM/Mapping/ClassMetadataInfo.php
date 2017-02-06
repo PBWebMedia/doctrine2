@@ -1010,7 +1010,7 @@ class ClassMetadataInfo implements ClassMetadata
             throw MappingException::identifierRequired($this->name);
         }
 
-        if ($this->usesIdGenerator() && $this->isIdentifierComposite) {
+        if ($this->isIdentifierComposite && ! ($this->usesIdGenerator() || $this->usesCustomGenerator())) {
             throw MappingException::compositeKeyAssignedIdGeneratorRequired($this->name);
         }
     }
@@ -1913,6 +1913,16 @@ class ClassMetadataInfo implements ClassMetadata
     public function usesIdGenerator()
     {
         return $this->generatorType != self::GENERATOR_TYPE_NONE;
+    }
+
+    /**
+     * Checks whether the mapped class uses an custom generator.
+     *
+     * @return boolean TRUE if the mapped class uses an custom generator, FALSE otherwise.
+     */
+    public function usesCustomGenerator()
+    {
+        return $this->generatorType != self::GENERATOR_TYPE_CUSTOM;
     }
 
     /**
