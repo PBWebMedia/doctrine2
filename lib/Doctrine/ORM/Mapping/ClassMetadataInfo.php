@@ -1165,11 +1165,7 @@ class ClassMetadataInfo implements ClassMetadata
             return false;
         }
 
-        if ( ! $this->isIdentifierComposite) {
-            return $fieldName === $this->identifier[0];
-        }
-
-        return in_array($fieldName, $this->identifier, true);
+        return $fieldName === $this->identifier[0];
     }
 
     /**
