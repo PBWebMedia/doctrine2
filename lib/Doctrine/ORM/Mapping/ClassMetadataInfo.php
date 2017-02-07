@@ -1800,10 +1800,6 @@ class ClassMetadataInfo implements ClassMetadata
      */
     public function getSingleIdentifierFieldName()
     {
-        if ($this->isIdentifierComposite) {
-            throw MappingException::singleIdNotAllowedOnCompositePrimaryKey($this->name);
-        }
-
         return $this->identifier[0];
     }
 
